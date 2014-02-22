@@ -9,4 +9,4 @@ bower install
 grunt
 ```
 
-Open generated index.html.
+Open index.html.
