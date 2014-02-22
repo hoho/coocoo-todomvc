@@ -1,0 +1,6 @@
+model Todo
+    property title<String>
+    property completed<js val (typeof val === 'boolean')>
+
+    construct title
+        this set title $title

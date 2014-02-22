@@ -1,0 +1,6 @@
+route Active
+    hash "^/active$"
+
+
+route Completed
+    hash "^/completed$"
