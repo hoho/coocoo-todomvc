@@ -46,7 +46,7 @@ view App
                 this set new $node
 
                 dom $node
-                    keypress e
+                    "keypress" e
                         set val [+dom @new value get]
 
                         test (e.which === 13 && (val = val.trim()))
@@ -57,7 +57,7 @@ view App
                 this set toggleAll $node
 
                 dom $node
-                    click
+                    "click"
                         set checked [+dom @toggleAll attribute "checked" get]
 
                         collection Todos @todos each m
@@ -144,31 +144,31 @@ view Todo
                 this set completed $node
 
                 dom $node
-                    click
+                    "click"
                         model Todo @model set completed [+dom @completed attribute "checked" get]
 
             "title" node
                 this set title $node
 
                 dom $node
-                    dblclick
+                    "dblclick"
                         dom @item class add "editing"
-                        dom @edit trigger focus
+                        dom @edit trigger "focus"
 
             "edit" node
                 this set edit $node
 
                 dom $node
-                    blur
+                    "blur"
                         this call editTitle
 
-                    keypress e
+                    "keypress" e
                         test (e.which === 13)
-                            dom @edit trigger blur
+                            dom @edit trigger "blur"
 
             "destroy" node
                 dom $node
-                    click
+                    "click"
                         model @model destroy
 
     method editTitle
@@ -181,5 +181,5 @@ view Stats
         +template "conkitty:stats" apply $remaining $completed $filter
             "clear" node
                 dom $node
-                    click
+                    "click"
                         this trigger "clear-completed"
