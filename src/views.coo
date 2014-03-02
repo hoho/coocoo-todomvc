@@ -16,7 +16,7 @@ view App
         this set todos
             +collection Todos create
                 add m
-                    dom @list append [+view Todo [+view Todo create $m] render]
+                    dom @list append [+view Todo render $m]
                     dom @toggleAll attribute "checked" set (false)
                     this set remaining (this.get('remaining') + 1)
 
