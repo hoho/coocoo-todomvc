@@ -1,7 +1,8 @@
 coocoo-todomvc
 ==============
 
-TodoMVC using CooCoo
+TodoMVC using CooCoo. Nearly full functional implementation, except for
+LocalStorage (which is in progress).
 
 ```
 npm install
