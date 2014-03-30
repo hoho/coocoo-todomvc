@@ -1,3 +1,4 @@
 application
-    construct parentNode
-        dom $parentNode append [+view App render]
+    construct $parentNode
+        ^$parentNode
+            *view App render
