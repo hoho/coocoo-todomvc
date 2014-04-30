@@ -5,10 +5,11 @@
     "author": "Marat Abdullin <dakota@brokenpipe.ru>",
     "license": "MIT",
     "devDependencies": {
-        "grunt": "~0.4.1",
-        "grunt-coocoo": "0.0.38",
-        "grunt-conkitty": "~0.4.9",
+        "grunt": "~0.4.4",
+        "grunt-coocoo": "0.0.41",
+        "grunt-conkitty": "~0.5.3",
         "grunt-contrib-concat": "~0.3.0",
-        "grunt-contrib-watch": "~0.5.3"
+        "grunt-contrib-watch": "~0.5.3",
+        "grunt-contrib-clean": "~0.4.0"
     }
 }

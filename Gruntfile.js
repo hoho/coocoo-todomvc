@@ -8,7 +8,7 @@ module.exports = function(grunt) {
             compile: {
                 src: 'src/**/*.coo',
                 dest: {
-                    common: 'js/coo.js',
+                    common: 'tmp/coo.js',
                     app:    'js/app.js',
                     debug:  true
                 }
@@ -17,16 +17,31 @@ module.exports = function(grunt) {
 
         conkitty: {
             compile: {
-                files: {
-                    'js/tpl.js': ['src/**/*.ctpl']
+                src: ['src/**/*.ctpl'],
+                dest: {
+                    common: 'tmp/tplcommon.js',
+                    templates: 'js/tpl.js',
+                    deps: 'tmp/tpldeps'
                 }
             }
         },
 
         concat: {
             css: {
-                src: 'src/**/*.css',
+                src: [
+                    'src/**/*.css',
+                    'tmp/tpldeps/*.css'
+                ],
                 dest: 'css/app.css'
+            },
+
+            js: {
+                src: [
+                    'tmp/tplcommon.js',
+                    'tmp/tpldeps/*.js',
+                    'tmp/coo.js'
+                ],
+                dest: 'js/deps.js'
             }
         },
 
@@ -38,20 +53,25 @@ module.exports = function(grunt) {
 
             ctpl: {
                 files: ['src/**/*.ctpl'],
-                tasks: ['conkitty']
+                tasks: ['conkitty', 'concat:js']
             },
 
             css: {
                 files: ['src/**/*.css'],
-                tasks: ['concat']
+                tasks: ['concat:css']
             }
+        },
+
+        clean: {
+            tmp: ['tmp']
         }
     });
 
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-coocoo');
     grunt.loadNpmTasks('grunt-conkitty');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('default', ['coocoo', 'conkitty', 'concat', 'watch']);
+    grunt.registerTask('default', ['clean', 'coocoo', 'conkitty', 'concat', 'watch']);
 };

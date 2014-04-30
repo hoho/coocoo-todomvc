@@ -5,47 +5,49 @@ app
         input#new-todo[placeholder="What needs to be done?"][autofocus]
             TRIGGER "new"
 
-    section#main
-        TRIGGER "main"
-
+    section#main AS $main
         input#toggle-all[type="checkbox"]
             TRIGGER "toggle-all"
 
         label[for="toggle-all"]
             "Mark all as complete"
 
-        ul#todo-list
-            TRIGGER "list"
+        ul#todo-list AS $list
 
-    footer#footer
-        TRIGGER "footer"
+    footer#footer AS $footer
+
+    TRIGGER "elems" ({
+        main: main,
+        list: list,
+        footer: footer
+    })
 
 
-item title completed
+item $title $completed
     li
         TRIGGER "item"
         div.view
             input.toggle[type="checkbox"]
-                TEST (completed)
+                TEST $completed
                     @checked "checked"
                 TRIGGER "completed"
 
             label
                 TRIGGER "title"
-                (title)
+                $title
 
             button.destroy
                 TRIGGER "destroy"
 
         input.edit
-            @value (title)
+            @value $title
             TRIGGER "edit"
 
 
-stats remaining completed filter
+stats $remaining $completed $filter
     span#todo-count
         strong
-            (remaining)
+            $remaining
         CHOOSE
             WHEN (remaining === 1)
                 " item"
@@ -55,24 +57,18 @@ stats remaining completed filter
 
     ul#filters
         li
-            a[href="#/"]
-                TEST (!filter)
-                    @class "selected"
+            a[href="#/"]:if($filter, /**/, .selected)
                 "All"
         li
-            a[href="#/active"]
-                TEST (filter === 'active')
-                    @class "selected"
+            a[href="#/active"]:if((filter === 'active'), .selected)
                 "Active"
         li
-            a[href="#/completed"]
-                TEST (filter === 'completed')
-                    @class "selected"
+            a[href="#/completed"]:if((filter === 'completed'), .selected)
                 "Completed"
 
-    TEST (completed)
+    TEST $completed
         button#clear-completed
             TRIGGER "clear"
             "Clear completed ("
-            (completed)
+            $completed
             ")"

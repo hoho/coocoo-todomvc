@@ -62,14 +62,10 @@ view App
                         collection Todos @todos each $m
                             model Todo $m set @completed $checked
 
-            "main" $node
-                set @main $node
-
-            "list" $node
-                set @list $node
-
-            "footer" $node
-                set @footer $node
+            "elems" $elems
+                set @main (elems.main)
+                set @list (elems.list)
+                set @footer (elems.footer)
 
         routes
             route Active
