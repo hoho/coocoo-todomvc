@@ -27,9 +27,7 @@ item $title $completed
     li
         TRIGGER "item"
         div.view
-            input.toggle[type="checkbox"]
-                TEST $completed
-                    @checked "checked"
+            input.toggle[type="checkbox"]:if($completed, [checked])
                 TRIGGER "completed"
 
             label
@@ -39,8 +37,7 @@ item $title $completed
             button.destroy
                 TRIGGER "destroy"
 
-        input.edit
-            @value $title
+        input.edit[value=$title]
             TRIGGER "edit"
 
 

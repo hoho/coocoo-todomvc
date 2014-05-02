@@ -9,8 +9,8 @@ module.exports = function(grunt) {
                 src: 'src/**/*.coo',
                 dest: {
                     common: 'tmp/coo.js',
-                    app:    'js/app.js',
-                    debug:  true
+                    app: 'js/app.js',
+                    debug: false
                 }
             }
         },
